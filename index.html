@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <title>CurrCon - Currency Converter</title>
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.3/semantic.min.css">
+   <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+   <div class="ui container ">
+      <div class="ui centered grid">
+         <div class="row" id="feedback">
+            <p id="empty"></p>
+         </div>
+
+         <div class="row">
+            <h3 class="ui icon header">
+               <i class="balance scale icon grey"></i>
+               <div class="content">
+                  <i class="pl flag "></i>
+                  Currency Converter
+                  <i class="eu flag"></i>
+                  <div class="sub header">convert your expenses from PLN to EURO </div>
+               </div>
+            </h3>
+         </div>
+      </div>
+
+      <div class="ui centered grid">
+         <form class="ui form">
+            <div class=" fields stackable">
+               <div class="field ">
+                  <label>exchange rate</label>
+                  <input id="rate" type="number" step=".01" min="0" placeholder="insert current exchange rate">
+               </div>
+               <div class="field ">
+                  <label>how much in PLN</label>
+                  <input id="amount" type="number" step=".01" min="0" placeholder="add value to exchange">
+               </div>
+            </div>
+            <button class="ui button grey" type="submit">calculate</button>
+         </form>
+      </div>
+
+      <div class="ui centered grid">
+
+         <div class="ui horizontal divider">recently calculated </div>
+         <div class="row">
+            <div class="ui list"></div>
+         </div>
+         <div class="row">
+            <a href="#" class="clear ui button grey">clear list</a>
+         </div>
+      </div>
+
+      <div class="ui centered grid">
+         <a href="mailto:piotrend@gmail.com" class="grey" id="footer">copyright 2018 &copy; by piotrEnd</a>
+      </div>
+
+   </div>
+
+
+
+   <!--  dependency for semantic-ui  -->
+   <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+      crossorigin="anonymous"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.3/semantic.min.js"></script>
+   <script src="script.js"></script>
+</body>
+
+</html>
