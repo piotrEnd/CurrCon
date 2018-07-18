@@ -17,16 +17,21 @@ function listenForInput() {
    clear.addEventListener('click', clearAll);
 }
 
+//check local storage
+const checkLocalStorage = function() {
+   const localStorageData = localStorage.getItem('data');
+   if (localStorageData !== null) {
+      return JSON.parse(localStorageData);
+   } else {
+      return [];
+   }
+};
+
 //get data from local storage
 function getData() {
-   let data;
-   if (localStorage.getItem('data') === null) {
-      data = [];
-   } else {
-      data = JSON.parse(localStorage.getItem('data'));
-   }
+   let data = checkLocalStorage();
 
-   data.forEach(function (element) {
+   data.forEach(function(element) {
       const li = document.createElement('li');
       li.className = 'item';
       li.appendChild(document.createTextNode(element));
@@ -42,14 +47,14 @@ function getData() {
 //add item to list
 function addAmount(e) {
    if (amount.value === '' || rate.value === '') {
-      showError('fill out both EXCHANGE RATE and AMOUNT')
+      showError('fill out both EXCHANGE RATE and AMOUNT');
    }
 
    //calculate
    let calcAmount = amount.value / rate.value;
    calcAmount = Math.round(calcAmount * 100) / 100;
 
-   //add new item 
+   //add new item
    const li = document.createElement('li');
    li.className = 'item';
    li.appendChild(document.createTextNode(`${amount.value}PLN \u2192 ${calcAmount}\u20AC`));
@@ -68,12 +73,7 @@ function addAmount(e) {
 
 //store in local storage
 function storeData(element) {
-   let data;
-   if (localStorage.getItem('data') === null) {
-      data = [];
-   } else {
-      data = JSON.parse(localStorage.getItem('data'));
-   }
+   let data = checkLocalStorage();
 
    data.push(element);
    localStorage.setItem('data', JSON.stringify(data));
@@ -81,7 +81,8 @@ function storeData(element) {
 
 //remove item from list
 function removeAmount(e) {
-   if (e.target.parentElement.classList.contains('trash')); {
+   if (e.target.parentElement.classList.contains('trash'));
+   {
       e.target.parentElement.parentElement.remove();
       removeData(e.target.parentElement.parentElement);
    }
@@ -89,17 +90,12 @@ function removeAmount(e) {
 
 //remove from local storage
 function removeData(element) {
-   let data;
-   if (localStorage.getItem('data') === null) {
-      data = [];
-   } else {
-      data = JSON.parse(localStorage.getItem('data'));
-   }
+   let data = checkLocalStorage();
 
-   data.forEach(function (part, index) {
+   data.forEach(function(part, index) {
       if (element.textContent === part) {
          data.splice(index, 1);
-      };
+      }
    });
 
    localStorage.setItem('data', JSON.stringify(data));
@@ -122,7 +118,7 @@ function showError(message) {
    warning.appendChild(document.createTextNode(message));
 
    feedback.insertBefore(warning, empty);
-   setTimeout(function () {
+   setTimeout(function() {
       document.querySelector('.message').remove();
    }, 3000);
 }
