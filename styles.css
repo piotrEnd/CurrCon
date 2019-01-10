@@ -3,12 +3,12 @@
    padding-top: 2rem;
 }
 
-.trash {
-   padding-left: 3rem;
+a {
+   margin-left: 3rem;
 }
 
 i:hover {
-   opacity: .9;
+   opacity: 0.9;
 }
 
 .item {
@@ -17,8 +17,6 @@ i:hover {
 
 #footer {
    color: #767676;
-   position: absolute;
-   bottom: 0;
    padding: 1rem;
 }
 
@@ -29,7 +27,6 @@ i:hover {
 @media (max-width: 800px) {
    button {
       margin-top: 1rem !important;
-      float: right;
    }
 }
 

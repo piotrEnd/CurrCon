@@ -2,8 +2,8 @@
 const form = document.querySelector('.form');
 const amount = document.querySelector('#amount');
 const rate = document.querySelector('#rate');
-const list = document.querySelector('.list');
-const clear = document.querySelector('.clear');
+const list = document.querySelector('#list');
+const clear = document.querySelector('#clear');
 const message = document.querySelector('message');
 
 //listen for input
@@ -36,16 +36,16 @@ function getData() {
       li.className = 'item';
       li.appendChild(document.createTextNode(element));
       const link = document.createElement('a');
-      link.className = 'trash';
-      link.innerHTML = '<i class="trash icon grey"></i>';
+      link.innerHTML = '<i class="trash icon grey del"></i>';
       li.appendChild(link);
-
       list.appendChild(li);
    });
 }
 
 //add item to list
 function addAmount(e) {
+   e.preventDefault();
+
    if (amount.value === '' || rate.value === '') {
       showError('fill out both EXCHANGE RATE and AMOUNT');
    }
@@ -57,18 +57,16 @@ function addAmount(e) {
    //add new item
    const li = document.createElement('li');
    li.className = 'item';
-   li.appendChild(document.createTextNode(`${amount.value}PLN \u2192 ${calcAmount}\u20AC`));
+   li.textContent = `${amount.value}PLN \u2192 ${calcAmount}\u20AC`;
 
    const link = document.createElement('a');
-   link.className = 'trash';
-   link.innerHTML = '<i class="trash icon grey"></i>';
+   link.innerHTML = '<i class="trash icon grey del"></i>';
    li.appendChild(link);
-
    list.appendChild(li);
+
    storeData(`${amount.value}PLN \u2192 ${calcAmount}\u20AC`);
    amount.value = '';
-
-   e.preventDefault();
+   amount.focus();
 }
 
 //store in local storage
@@ -81,10 +79,9 @@ function storeData(element) {
 
 //remove item from list
 function removeAmount(e) {
-   if (e.target.parentElement.classList.contains('trash'));
-   {
+   if (e.target.classList.contains('del')) {
       e.target.parentElement.parentElement.remove();
-      removeData(e.target.parentElement.parentElement);
+      removeData(e.target.textContent);
    }
 }
 
